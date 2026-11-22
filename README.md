@@ -28,9 +28,19 @@ Open http://localhost:3000.
 
 Optional: set `OPENAI_MODEL` to use a different model. The default is `gpt-4.1-mini`.
 
-## Deploy
+## Deploy to Netlify
 
-This is a small Node HTTP server and can run on Replit or another Node host. Add `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`) in the host's Secrets/Environment settings. Do not put the API key in the browser code or commit it to Git.
+The repository includes a Netlify configuration and a serverless function for the AI chat endpoint.
+
+1. Sign in to [Netlify](https://app.netlify.com/) and choose **Add new project → Import an existing project**.
+2. Connect GitHub and select `uskokovic2-creator/MovieGuide`.
+3. Netlify should detect the settings in `netlify.toml`. The publish directory is `public`; the functions directory is `netlify/functions`. No build command is needed.
+4. Before testing the chat, open **Site configuration → Environment variables** in Netlify and add `OPENAI_API_KEY` with your OpenAI API key. Optionally add `OPENAI_MODEL`; the default is `gpt-4.1-mini`.
+5. Trigger a deploy (or let the first deploy finish), then open the Netlify site URL.
+
+The `/api/chat` route is redirected to the Netlify Function, which calls OpenAI server-side. Never put the API key in browser code, share it in chat, or commit it to Git.
+
+The original `server.js` remains available for local development with `npm start`.
 
 ## Scope
 
