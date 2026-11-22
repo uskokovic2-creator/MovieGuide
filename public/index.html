@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5ef">
+  <title>MovieGuide — German Film Conversation</title>
+  <style>
+    :root{color-scheme:light;--ink:#20251f;--muted:#687168;--paper:#f7f5ef;--card:#fffefa;--green:#245b45;--line:#e6e4dc;--gold:#d6a84b}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .shell{max-width:900px;margin:0 auto;padding:28px 20px 48px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+    .brand{font-weight:800;letter-spacing:-.04em;font-size:1.25rem}.brand span{color:var(--green)}.tag{font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:99px}
+    .hero{max-width:650px;margin:0 auto 24px;text-align:center}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--green);font-size:.72rem;font-weight:800}
+    h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.05;letter-spacing:-.055em;margin:12px 0}.hero p{color:var(--muted);margin:0}
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}.panel,.chat{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 30px #292b2010}
+    .panel{padding:20px}.poster{height:145px;border-radius:12px;background:linear-gradient(140deg,#1e3c34,#8c9d73 55%,#d9b66e);display:flex;align-items:end;padding:14px;color:white;font-weight:800;font-size:1.35rem;letter-spacing:-.04em}
+    .panel h2{font-size:1.05rem;margin:16px 0 4px}.meta{color:var(--muted);font-size:.83rem}.summary{font-size:.9rem;margin:14px 0 18px}
+    label{display:block;font-size:.82rem;font-weight:700;margin:14px 0 6px}select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);font:inherit}
+    .chat{min-height:560px;display:flex;flex-direction:column;overflow:hidden}.chat-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.chat-head strong{font-size:.95rem}.online{color:var(--green);font-size:.78rem}
+    #messages{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1;min-height:350px;max-height:520px;overflow:auto}
+    .msg{max-width:88%;padding:12px 14px;border-radius:14px;font-size:.93rem;white-space:pre-wrap;overflow-wrap:anywhere}.assistant{background:#f0f2eb;align-self:flex-start;border-bottom-left-radius:4px}.user{background:var(--green);color:white;align-self:flex-end;border-bottom-right-radius:4px}
+    .welcome{color:var(--muted);font-size:.9rem;text-align:center;margin:auto;max-width:340px}.suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 14px}.suggestions button{border:1px solid var(--line);background:white;border-radius:99px;padding:7px 11px;font:inherit;font-size:.78rem;cursor:pointer;color:var(--green)}
+    .composer{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--line)}textarea{resize:vertical;min-height:48px;max-height:140px;flex:1;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit}button.send{background:var(--green);color:white;border:0;border-radius:12px;padding:0 18px;font:inherit;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
+    .note{font-size:.75rem;color:var(--muted);padding:0 20px 16px}.error{color:#a33}.footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:18px}
+    @media(max-width:700px){.layout{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:110px 1fr;gap:0 14px}.poster{height:120px;grid-row:span 3}.panel h2{margin-top:2px}.summary{grid-column:1/-1;margin-bottom:4px}.panel label,.panel select{grid-column:1/-1}.chat{min-height:520px}.tag{display:none}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top"><div class="brand">kino<span>freund</span></div><div class="tag">GERMAN FILM · AI CONVERSATION</div></header>
+    <section class="hero"><div class="eyebrow">Learn German through cinema</div><h1>Watch. Think. <span style="color:var(--green)">Discuss.</span></h1><p>Practice German with an AI conversation partner who helps you explore film, language, and culture.</p></section>
+    <section class="layout">
+      <aside class="panel">
+        <div class="poster">Good Bye, Lenin!</div>
+        <div><h2>Good Bye, Lenin!</h2><div class="meta">Wolfgang Becker · 2003 · Germany</div></div>
+        <p class="summary">A family story set around the fall of the Berlin Wall. Explore memory, identity, life in the GDR, and German reunification.</p>
+        <label for="level">Your German level</label>
+        <select id="level"><option>A2</option><option selected>B1</option><option>B2</option></select>
+        <label for="language">Explanation language</label>
+        <select id="language"><option>German</option><option>English</option></select>
+      </aside>
+      <section class="chat" aria-label="German discussion chat">
+        <div class="chat-head"><strong>Gespräch mit KinoFreund</strong><span class="online">● Ready to chat</span></div>
+        <div id="messages" aria-live="polite"><div class="welcome">Hallo! Ich bin dein Gesprächspartner. Was denkst du über Alex' Entscheidung, seine Mutter zu schützen?<br><br><span style="font-size:.8rem">You can start in German or ask for help in English.</span></div></div>
+        <div class="suggestions">
+          <button type="button" data-prompt="Warum möchte Alex seine Mutter schützen?">Über Alex sprechen</button>
+          <button type="button" data-prompt="Was war die DDR? Bitte einfach erklären.">Die DDR verstehen</button>
+          <button type="button" data-prompt="Welche Themen sind im Film besonders wichtig?">Themen diskutieren</button>
+        </div>
+        <form class="composer" id="chatForm"><textarea id="messageInput" rows="1" placeholder="Schreib deine Antwort auf Deutsch …" aria-label="Your message"></textarea><button class="send" id="sendButton" type="submit">Send</button></form>
+        <div class="note">Your chat is not saved. Do not enter personal or sensitive information.</div>
+      </section>
+    </section>
+    <div class="footer">A simple learning prototype · AI responses may occasionally be inaccurate.</div>
+  </main>
+<script>
+  const form = document.getElementById("chatForm");
+  const input = document.getElementById("messageInput");
+  const messagesEl = document.getElementById("messages");
+  const sendButton = document.getElementById("sendButton");
+  const history = [];
+  let busy = false;
+
+  function addMessage(role, content) {
+    const welcome = messagesEl.querySelector(".welcome");
+    if (welcome) welcome.remove();
+    const node = document.createElement("div");
+    node.className = "msg " + (role === "user" ? "user" : "assistant");
+    node.textContent = content;
+    messagesEl.appendChild(node);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return node;
+  }
+
+  async function sendMessage(text) {
+    const value = text.trim();
+    if (!value || busy) return;
+    busy = true; sendButton.disabled = true;
+    addMessage("user", value);
+    history.push({role:"user", content:value});
+    input.value = "";
+    const pending = addMessage("assistant", "Einen Moment …");
+    try {
+      const response = await fetch("/api/chat", {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({messages:history, level:document.getElementById("level").value, explanationLanguage:document.getElementById("language").value})
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Something went wrong.");
+      pending.textContent = data.answer;
+      history.push({role:"assistant", content:data.answer});
+    } catch (error) {
+      pending.textContent = error.message;
+      pending.classList.add("error");
+      history.pop();
+    } finally {
+      busy = false; sendButton.disabled = false; input.focus();
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+  }
+
+  form.addEventListener("submit", event => { event.preventDefault(); sendMessage(input.value); });
+  document.querySelectorAll("[data-prompt]").forEach(button => button.addEventListener("click", () => sendMessage(button.dataset.prompt)));
+  input.addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); form.requestSubmit(); } });
+</script>
+</body>
+</html>
